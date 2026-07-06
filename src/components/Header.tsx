@@ -6,8 +6,8 @@ export default function Header() {
       <div className="mx-auto flex max-w-md items-center gap-2">
         <Logo className="h-7 w-7" />
         <span className="text-lg">
-          <span className="font-bold text-zinc-900">PREMIA</span>{" "}
-          <span className="font-normal text-teal-500">pix</span>
+          <span className="font-bold text-zinc-900">Fast</span>
+          <span className="font-normal text-teal-500">Pay</span>
         </span>
       </div>
     </header>

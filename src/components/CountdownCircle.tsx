@@ -9,27 +9,29 @@ export default function CountdownCircle({
   seconds: number;
   onComplete: () => void;
 }) {
-  const [elapsed, setElapsed] = useState(0);
+  const [remaining, setRemaining] = useState(seconds);
+  const [filled, setFilled] = useState(false);
   const radius = 54;
   const circumference = 2 * Math.PI * radius;
 
   useEffect(() => {
-    const start = Date.now();
-    const frame = requestAnimationFrame(function tick() {
-      const value = Math.min((Date.now() - start) / (seconds * 1000), 1);
-      setElapsed(value);
-      if (value < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        onComplete();
-      }
-    });
-    return () => cancelAnimationFrame(frame);
+    // Defer to the next frame so the browser paints the empty ring first,
+    // then transitions it to full over `seconds` via CSS.
+    const raf = requestAnimationFrame(() => setFilled(true));
+
+    const tickId = setInterval(() => {
+      setRemaining((value) => (value > 1 ? value - 1 : 1));
+    }, 1000);
+
+    const completeId = setTimeout(onComplete, seconds * 1000);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      clearInterval(tickId);
+      clearTimeout(completeId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seconds]);
-
-  const offset = circumference * (1 - elapsed);
-  const remaining = Math.max(0, Math.ceil(seconds - elapsed * seconds));
 
   return (
     <div className="relative flex h-32 w-32 items-center justify-center">
@@ -51,8 +53,8 @@ export default function CountdownCircle({
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          style={{ transition: "stroke-dashoffset 100ms linear" }}
+          strokeDashoffset={filled ? 0 : circumference}
+          style={{ transition: `stroke-dashoffset ${seconds}s linear` }}
         />
       </svg>
       <span className="absolute text-2xl font-semibold text-zinc-900">
