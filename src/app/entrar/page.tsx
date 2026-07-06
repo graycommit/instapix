@@ -15,7 +15,7 @@ export default function EntrarPage() {
   const canSubmit = email.trim().length > 3 && phone.replace(/\D/g, "").length >= 10;
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex min-h-dvh flex-col bg-white">
       <Header />
       <main className="flex flex-1 justify-center px-6 pt-20">
         <div className="w-full max-w-md">

@@ -70,7 +70,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-screen flex-col bg-zinc-100">
+    <div className="flex h-dvh flex-col bg-zinc-100">
       <ChatHeader balance={balance} />
 
       <main className="flex-1 space-y-3 overflow-y-auto px-4 py-4">

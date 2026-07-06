@@ -10,7 +10,7 @@ export default function LoadingPage() {
   const router = useRouter();
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
+    <div className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 py-10 text-center">
       <FacetedBackground />
 
       <CountdownCircle seconds={5} onComplete={() => router.push("/entrar")} />
