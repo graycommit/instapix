@@ -1,24 +1,32 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Header from "@/components/Header";
+import Brand from "@/components/Brand";
 import CountdownCircle from "@/components/CountdownCircle";
+import FacetedBackground from "@/components/FacetedBackground";
+import Sparkle from "@/components/Sparkle";
 
 export default function LoadingPage() {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
-      <Header />
-      <main className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-        <CountdownCircle seconds={5} onComplete={() => router.push("/entrar")} />
-        <h1 className="mt-8 text-xl font-semibold text-zinc-900">
-          Só um instante...
-        </h1>
-        <p className="mt-2 max-w-xs text-sm text-zinc-500">
-          Estamos preparando tudo para o seu atendimento.
-        </p>
-      </main>
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
+      <FacetedBackground />
+
+      <CountdownCircle seconds={5} onComplete={() => router.push("/entrar")} />
+
+      <h1 className="mt-8 text-2xl font-bold text-slate-900">
+        Fila de Atendimento Virtual
+      </h1>
+      <p className="mt-3 max-w-xs text-sm text-slate-500">
+        Seu atendimento começará em breve. Por favor, mantenha esta tela
+        aberta para garantir o seu lugar.
+      </p>
+
+      <div className="mt-16 flex items-center gap-2">
+        <Brand />
+        <Sparkle className="h-4 w-4 text-slate-300" />
+      </div>
     </div>
   );
 }
