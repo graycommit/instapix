@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Toggle from "@/components/Toggle";
 import { formatPhone } from "@/lib/phone";
 
 export default function EntrarPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [remember, setRemember] = useState(false);
@@ -64,6 +66,7 @@ export default function EntrarPage() {
           <button
             type="button"
             disabled={!canSubmit}
+            onClick={() => router.push("/chat")}
             className="mt-6 w-full rounded-xl bg-teal-400 py-4 font-semibold text-white transition-colors hover:bg-teal-500 disabled:cursor-not-allowed disabled:bg-teal-200"
           >
             Continuar
