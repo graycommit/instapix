@@ -2,7 +2,13 @@
 
 import { useRouter } from "next/navigation";
 
-export default function AppHeader({ title }: { title: string }) {
+export default function AppHeader({
+  title,
+  showAccount = true,
+}: {
+  title: string;
+  showAccount?: boolean;
+}) {
   const router = useRouter();
 
   return (
@@ -28,23 +34,27 @@ export default function AppHeader({ title }: { title: string }) {
 
       <h1 className="text-lg font-bold text-teal-900">{title}</h1>
 
-      <button
-        type="button"
-        aria-label="Conta"
-        className="flex h-9 w-9 items-center justify-center rounded-full text-teal-800 transition-colors hover:bg-black/5"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          className="h-6 w-6"
+      {showAccount ? (
+        <button
+          type="button"
+          aria-label="Conta"
+          className="flex h-9 w-9 items-center justify-center rounded-full text-teal-800 transition-colors hover:bg-black/5"
         >
-          <circle cx="12" cy="12" r="9" />
-          <circle cx="12" cy="10" r="3" />
-          <path d="M6.5 18.2a6 6 0 0111 0" />
-        </svg>
-      </button>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            className="h-6 w-6"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="10" r="3" />
+            <path d="M6.5 18.2a6 6 0 0111 0" />
+          </svg>
+        </button>
+      ) : (
+        <div className="h-9 w-9" aria-hidden />
+      )}
     </header>
   );
 }
