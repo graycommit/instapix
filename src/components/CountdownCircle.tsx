@@ -11,7 +11,7 @@ export default function CountdownCircle({
 }) {
   const [remaining, setRemaining] = useState(seconds);
   const [filled, setFilled] = useState(false);
-  const radius = 52;
+  const radius = 48;
   const circumference = 2 * Math.PI * radius;
 
   useEffect(() => {
@@ -34,31 +34,30 @@ export default function CountdownCircle({
   }, [seconds]);
 
   return (
-    <div className="relative flex h-36 w-36 items-center justify-center drop-shadow-md">
-      <svg viewBox="0 0 120 120" className="h-36 w-36 -rotate-90">
+    <div className="relative flex h-32 w-32 items-center justify-center">
+      <svg viewBox="0 0 120 120" className="h-32 w-32 -rotate-90">
         <circle
           cx="60"
           cy="60"
           r={radius}
           fill="none"
-          stroke="#122A4D"
-          strokeWidth="12"
+          stroke="#E2E8F0"
+          strokeWidth="9"
         />
         <circle
           cx="60"
           cy="60"
           r={radius}
           fill="none"
-          stroke="#2DD4BF"
-          strokeWidth="12"
+          stroke="#0F766E"
+          strokeWidth="9"
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={filled ? 0 : circumference}
           style={{ transition: `stroke-dashoffset ${seconds}s linear` }}
         />
-        <circle cx="60" cy="60" r="44" fill="white" />
       </svg>
-      <span className="absolute text-4xl font-bold text-slate-900">
+      <span className="absolute text-3xl font-semibold text-slate-900">
         {remaining}
       </span>
     </div>

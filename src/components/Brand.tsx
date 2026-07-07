@@ -1,6 +1,6 @@
 export default function Brand({ className = "h-8" }: { className?: string }) {
   return (
-    <div className={`aspect-[471/101] overflow-hidden ${className}`}>
+    <div className={`aspect-[3860/1037] overflow-hidden ${className}`}>
       <img
         src="/logo.png"
         alt="FastPay"
