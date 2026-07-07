@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 function HomeIcon({ className }: { className?: string }) {
   return (
@@ -47,7 +47,6 @@ const items = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-  const router = useRouter();
 
   return (
     <nav className="flex items-center justify-around border-t border-slate-100 bg-white px-2 py-2">
@@ -57,9 +56,10 @@ export default function BottomNav() {
           <button
             key={href}
             type="button"
-            onClick={() => router.push(href)}
-            className={`flex flex-col items-center gap-1 rounded-2xl px-4 py-2 text-xs font-medium transition-colors ${
-              active ? "bg-teal-100 text-teal-700" : "text-slate-400"
+            disabled
+            aria-disabled="true"
+            className={`flex cursor-not-allowed flex-col items-center gap-1 rounded-2xl px-4 py-2 text-xs font-medium ${
+              active ? "bg-teal-100 text-teal-700" : "text-slate-300"
             }`}
           >
             <Icon className="h-5 w-5" />
