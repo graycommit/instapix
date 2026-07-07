@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import BottomNav from "@/components/BottomNav";
 import AttachmentButton from "@/components/chat/AttachmentButton";
 import ChatTopBar from "@/components/chat/ChatTopBar";
@@ -28,6 +29,7 @@ function now() {
 }
 
 export default function ChatPage() {
+  const router = useRouter();
   const [items, setItems] = useState<TimelineItem[]>([]);
   const [stepIndex, setStepIndex] = useState(0);
   const [typing, setTyping] = useState(false);
@@ -40,14 +42,16 @@ export default function ChatPage() {
     const step = chatScript[stepIndex];
 
     if (step.kind === "system") {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setItems((prev) => [...prev, { id: `step-${stepIndex}`, kind: "system", text: step.text }]);
-      const joinTimer = setTimeout(() => setStepIndex((i) => i + 1), 700);
+      const joinTimer = setTimeout(() => {
+        setItems((prev) => [...prev, { id: `step-${stepIndex}`, kind: "system", text: step.text }]);
+        setStepIndex((i) => i + 1);
+      }, 300);
       return () => clearTimeout(joinTimer);
     }
 
     let advanceTimer: ReturnType<typeof setTimeout> | undefined;
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- harmless if StrictMode double-invokes; the actual message reveal below is timer-gated and cancelable.
     setTyping(true);
     const revealTimer = setTimeout(() => {
       setTyping(false);
@@ -88,6 +92,12 @@ export default function ChatPage() {
       ...prev,
       { id: `user-${stepIndex}`, kind: "user", text: option, time: now() },
     ]);
+
+    if (option === "Perfeito, obrigado!") {
+      setTimeout(() => router.push("/checkout"), 900);
+      return;
+    }
+
     setStepIndex((i) => i + 1);
   }
 

@@ -153,7 +153,7 @@ export default function EntrarPage() {
             disabled={!canSubmit}
             onClick={() => {
               saveRegistration({ name, email, phone });
-              router.push("/checkout");
+              router.push("/chat");
             }}
             className="mt-7 w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-700 py-4 font-semibold text-white shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
           >

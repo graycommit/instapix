@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { formatPhone } from "@/lib/phone";
 import { loadRegistration } from "@/lib/registration";
 
@@ -56,10 +55,10 @@ function SectionNumber({ n }: { n: number }) {
 }
 
 export default function CheckoutPage() {
-  const router = useRouter();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [paid, setPaid] = useState(false);
 
   useEffect(() => {
     const saved = loadRegistration();
@@ -180,15 +179,24 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          <button
-            type="button"
-            disabled={!canSubmit}
-            onClick={() => router.push("/chat")}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-500 to-teal-700 py-4 font-bold uppercase tracking-wide text-white shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <CardIcon className="h-5 w-5" />
-            Pagar com Pix
-          </button>
+          {paid ? (
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-center">
+              <p className="text-sm font-bold text-emerald-700">Pagamento confirmado!</p>
+              <p className="mt-1 text-xs text-emerald-600">
+                Você vai receber o acesso por e-mail em instantes.
+              </p>
+            </div>
+          ) : (
+            <button
+              type="button"
+              disabled={!canSubmit}
+              onClick={() => setPaid(true)}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-500 to-teal-700 py-4 font-bold uppercase tracking-wide text-white shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <CardIcon className="h-5 w-5" />
+              Pagar com Pix
+            </button>
+          )}
 
           <ul className="flex flex-col gap-1.5 text-xs text-slate-500">
             <li>• Pagamento somente à vista</li>
