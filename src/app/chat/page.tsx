@@ -1,91 +1,157 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ChatHeader from "@/components/chat/ChatHeader";
-import MessageBubble from "@/components/chat/MessageBubble";
-import OptionButtons from "@/components/chat/OptionButtons";
+import BottomNav from "@/components/BottomNav";
+import AttachmentButton from "@/components/chat/AttachmentButton";
+import ChatTopBar from "@/components/chat/ChatTopBar";
+import ImageMessageBubble from "@/components/chat/ImageMessageBubble";
+import QuickReplyRow from "@/components/chat/QuickReplyRow";
+import SystemNotice from "@/components/chat/SystemNotice";
+import TextBubble from "@/components/chat/TextBubble";
 import TypingDots from "@/components/chat/TypingDots";
+import VoiceMessageBubble from "@/components/chat/VoiceMessageBubble";
 import { chatScript } from "@/lib/chatScript";
 
-type Message = {
-  id: string;
-  side: "bot" | "user";
-  text: string;
-};
+type TimelineItem =
+  | { id: string; kind: "system"; text: string }
+  | { id: string; kind: "bot"; text: string; time: string }
+  | { id: string; kind: "agent"; name: string; text: string; time: string }
+  | { id: string; kind: "voice"; name: string; duration: string; time: string }
+  | { id: string; kind: "image"; name: string; time: string }
+  | { id: string; kind: "user"; text: string; time: string };
+
+function now() {
+  return new Date().toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [items, setItems] = useState<TimelineItem[]>([]);
   const [stepIndex, setStepIndex] = useState(0);
   const [typing, setTyping] = useState(false);
   const [awaitingOptions, setAwaitingOptions] = useState<string[] | null>(null);
-  const [balance, setBalance] = useState(0);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (stepIndex >= chatScript.length) return;
 
-    let advanceTimer: ReturnType<typeof setTimeout> | undefined;
-    let balanceTimer: ReturnType<typeof setTimeout> | undefined;
+    const step = chatScript[stepIndex];
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (step.kind === "system") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setItems((prev) => [...prev, { id: `step-${stepIndex}`, kind: "system", text: step.text }]);
+      const joinTimer = setTimeout(() => setStepIndex((i) => i + 1), 700);
+      return () => clearTimeout(joinTimer);
+    }
+
+    let advanceTimer: ReturnType<typeof setTimeout> | undefined;
+
     setTyping(true);
     const revealTimer = setTimeout(() => {
-      const step = chatScript[stepIndex];
       setTyping(false);
-      setMessages((prev) => [
-        ...prev,
-        { id: `bot-${stepIndex}`, side: "bot", text: step.text },
-      ]);
-
-      if (step.kind === "bot" && step.balanceAfter !== undefined) {
-        const nextBalance = step.balanceAfter;
-        balanceTimer = setTimeout(() => setBalance(nextBalance), 500);
-      }
 
       if (step.kind === "choice") {
         setAwaitingOptions(step.options);
-      } else {
-        advanceTimer = setTimeout(() => setStepIndex((i) => i + 1), 900);
+        return;
       }
-    }, 1000);
+
+      const time = now();
+      setItems((prev) => [
+        ...prev,
+        step.kind === "bot"
+          ? { id: `step-${stepIndex}`, kind: "bot", text: step.text, time }
+          : step.kind === "agent"
+            ? { id: `step-${stepIndex}`, kind: "agent", name: step.name, text: step.text, time }
+            : step.kind === "voice"
+              ? { id: `step-${stepIndex}`, kind: "voice", name: step.name, duration: step.duration, time }
+              : { id: `step-${stepIndex}`, kind: "image", name: step.name, time },
+      ]);
+
+      advanceTimer = setTimeout(() => setStepIndex((i) => i + 1), 900);
+    }, 1100);
 
     return () => {
       clearTimeout(revealTimer);
       clearTimeout(advanceTimer);
-      clearTimeout(balanceTimer);
     };
   }, [stepIndex]);
 
   useEffect(() => {
     scrollAnchorRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, typing, awaitingOptions]);
+  }, [items, typing, awaitingOptions]);
 
   function handleSelect(option: string) {
     setAwaitingOptions(null);
-    setMessages((prev) => [
+    setItems((prev) => [
       ...prev,
-      { id: `user-${stepIndex}`, side: "user", text: option },
+      { id: `user-${stepIndex}`, kind: "user", text: option, time: now() },
     ]);
     setStepIndex((i) => i + 1);
   }
 
   return (
-    <div className="flex h-dvh flex-col bg-zinc-100">
-      <ChatHeader balance={balance} />
+    <div className="flex h-dvh flex-col bg-teal-50/40">
+      <ChatTopBar name="Seu Nome" balance={149.52} />
 
       <main className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-        {messages.map((message) => (
-          <MessageBubble key={message.id} side={message.side} text={message.text} />
-        ))}
+        {items.map((item) => {
+          switch (item.kind) {
+            case "system":
+              return <SystemNotice key={item.id} text={item.text} />;
+            case "bot":
+              return (
+                <TextBubble key={item.id} variant="bot" text={item.text} time={item.time} />
+              );
+            case "agent":
+              return (
+                <TextBubble
+                  key={item.id}
+                  variant="agent"
+                  name={item.name}
+                  text={item.text}
+                  time={item.time}
+                />
+              );
+            case "voice":
+              return (
+                <VoiceMessageBubble
+                  key={item.id}
+                  name={item.name}
+                  duration={item.duration}
+                  time={item.time}
+                />
+              );
+            case "image":
+              return <ImageMessageBubble key={item.id} name={item.name} time={item.time} />;
+            case "user":
+              return (
+                <div key={item.id} className="flex flex-col items-end">
+                  <div className="max-w-[78%] rounded-2xl rounded-br-sm bg-teal-600 px-4 py-3 text-sm text-white">
+                    {item.text}
+                  </div>
+                  <span className="mt-1 px-1 text-[11px] text-slate-400">{item.time}</span>
+                </div>
+              );
+            default:
+              return null;
+          }
+        })}
 
         {typing && <TypingDots />}
 
         {awaitingOptions && (
-          <OptionButtons options={awaitingOptions} onSelect={handleSelect} />
+          <div className="flex flex-col items-center gap-3 pt-1">
+            <QuickReplyRow options={awaitingOptions} onSelect={handleSelect} />
+            <AttachmentButton label="Enviar imagem" />
+          </div>
         )}
 
         <div ref={scrollAnchorRef} />
       </main>
+
+      <BottomNav />
     </div>
   );
 }

@@ -1,50 +1,23 @@
 export type ChatStep =
-  | { kind: "bot"; text: string; balanceAfter?: number }
-  | { kind: "choice"; text: string; options: string[] };
+  | { kind: "system"; text: string }
+  | { kind: "bot"; text: string }
+  | { kind: "agent"; name: string; text: string }
+  | { kind: "voice"; name: string; duration: string }
+  | { kind: "image"; name: string }
+  | { kind: "choice"; options: string[] };
 
 export const chatScript: ChatStep[] = [
+  { kind: "system", text: "Marcela Oliveira entrou no chat" },
   {
     kind: "bot",
-    text: "Olá! Sou a Paula, assistente virtual de atendimento da plataforma FastPay.",
+    text: "Olá! Sou seu Concierge PIX. Marcela está aqui para te ajudar com o suporte técnico hoje. 🚀",
   },
   {
-    kind: "bot",
-    text: "Seu cadastro foi localizado com sucesso e as credenciais de membro provisórias já estão reservadas.",
+    kind: "agent",
+    name: "Marcela Oliveira",
+    text: "Oi! Vi que você teve uma dúvida sobre os limites. Consegue me mandar um print da tela de erro?",
   },
-  {
-    kind: "bot",
-    text: "Para liberar seu cashback de boas-vindas, preciso que você conclua 3 tarefas rápidas de avaliação. Vamos começar?",
-  },
-  {
-    kind: "choice",
-    text: "Toque no botão abaixo quando estiver pronto.",
-    options: ["Vamos começar!"],
-  },
-  {
-    kind: "choice",
-    text: "Tarefa 1 de 3 — como você avalia sua experiência com o app até agora?",
-    options: ["⭐⭐⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐"],
-  },
-  { kind: "bot", text: "Obrigada pela avaliação! ✅" },
-  {
-    kind: "choice",
-    text: "Tarefa 2 de 3 — qual desses benefícios mais te interessa?",
-    options: ["Cashback em compras", "Transferências grátis", "Programa de pontos"],
-  },
-  { kind: "bot", text: "Ótima escolha! ✅" },
-  {
-    kind: "choice",
-    text: "Tarefa 3 de 3 — deseja continuar recebendo novidades por e-mail e WhatsApp?",
-    options: ["Sim, quero receber", "Não, obrigado"],
-  },
-  { kind: "bot", text: "Perfeito! Todas as tarefas foram concluídas. 🎉" },
-  {
-    kind: "bot",
-    text: "Seu cashback de boas-vindas de R$ 25,00 foi liberado e já está disponível no seu saldo.",
-    balanceAfter: 25,
-  },
-  {
-    kind: "bot",
-    text: "Nossa equipe entrará em contato em breve pelos dados informados. Obrigada por fazer parte do FastPay!",
-  },
+  { kind: "voice", name: "Marcela Oliveira", duration: "0:14" },
+  { kind: "image", name: "Marcela Oliveira" },
+  { kind: "choice", options: ["Perfeito, obrigado!", "Ainda com dúvidas"] },
 ];
