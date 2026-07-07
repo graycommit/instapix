@@ -4,14 +4,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AppTopBar from "@/components/AppTopBar";
 import BottomNav from "@/components/BottomNav";
-import Confetti from "@/components/Confetti";
 import ScratchCard from "@/components/ScratchCard";
 
-function SparkleIcon({ className }: { className?: string }) {
+function CheckBadgeIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M12 2c.6 3.4 2 4.8 5.4 5.4-3.4.6-4.8 2-5.4 5.4-.6-3.4-2-4.8-5.4-5.4C10 6.8 11.4 5.4 12 2z" />
-      <path d="M19 14c.3 1.7 1 2.4 2.7 2.7-1.7.3-2.4 1-2.7 2.7-.3-1.7-1-2.4-2.7-2.7 1.7-.3 2.4-1 2.7-2.7z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M5 13l4 4L19 7" />
     </svg>
   );
 }
@@ -48,22 +46,20 @@ export default function ResgatarPage() {
       <AppTopBar balance={revealed ? prizeAmount : 0} />
 
       <main className="relative flex-1 select-none px-5 pb-6 text-center">
-        {revealed && <Confetti />}
-
         <h1 className="relative text-xl font-bold text-teal-950">
-          {revealed ? "Parabéns!" : "Parabéns! Você foi selecionado"}
+          {revealed ? "Parabéns" : "Parabéns! Você foi selecionado"}
         </h1>
         <p className="relative mt-1 text-sm text-slate-500">
           {revealed ? "Você foi selecionado" : "Raspe abaixo e descubra seu prêmio"}
         </p>
 
         {revealed ? (
-          <div className="animate-pop-in relative mt-6 rounded-3xl bg-white p-8 shadow-sm">
-            <div className="absolute -left-2 -top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-teal-500 shadow-md">
-              <SparkleIcon className="h-4 w-4" />
+          <div className="animate-fade-up relative mt-6 rounded-3xl bg-white p-8 shadow-sm">
+            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-teal-50">
+              <CheckBadgeIcon className="h-5 w-5 text-teal-600" />
             </div>
-            <p className="text-xs font-bold tracking-widest text-slate-700">
-              VOCÊ GANHOU!
+            <p className="mt-3 text-sm font-bold tracking-wide text-slate-700">
+              VOCÊ GANHOU
             </p>
             <p className="mt-2 text-4xl font-extrabold text-teal-600">
               R$ {formattedPrize}
@@ -79,9 +75,6 @@ export default function ResgatarPage() {
           <>
             <div className="relative mt-6">
               <ScratchCard prizeLabel={`R$ ${formattedPrize}`} onProgress={handleProgress} />
-              <div className="absolute -right-2 -top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-teal-500 shadow-md">
-                <SparkleIcon className="h-4 w-4" />
-              </div>
             </div>
 
             <p className="mt-5 text-sm text-slate-500">
@@ -105,7 +98,7 @@ export default function ResgatarPage() {
           disabled={!revealed}
           onClick={() => router.push("/entrar")}
           className={`relative mt-6 flex w-full items-center justify-center gap-2 rounded-2xl py-4 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:bg-teal-300/60 enabled:bg-teal-900 enabled:hover:bg-teal-950 ${
-            revealed ? "animate-pop-in" : ""
+            revealed ? "animate-fade-up" : ""
           }`}
         >
           Quero resgatar

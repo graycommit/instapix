@@ -10,7 +10,7 @@ export const chatScript: ChatStep[] = [
   { kind: "system", text: "Marcela Oliveira entrou no chat" },
   {
     kind: "bot",
-    text: "Olá! Sou seu Concierge PIX. Marcela está aqui para te ajudar com o suporte técnico hoje. 🚀",
+    text: "Olá! Sou seu Concierge PIX. Marcela está aqui para te ajudar com o suporte técnico hoje.",
   },
   {
     kind: "agent",

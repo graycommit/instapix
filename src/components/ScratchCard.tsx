@@ -44,11 +44,11 @@ export default function ScratchCard({
       ctx!.fillStyle = gradient;
       ctx!.fillRect(0, 0, width, height);
 
-      ctx!.fillStyle = "#8b93a1";
-      ctx!.font = "600 15px system-ui, sans-serif";
+      ctx!.fillStyle = "#334155";
+      ctx!.font = "700 16px system-ui, sans-serif";
       ctx!.textAlign = "center";
       ctx!.textBaseline = "middle";
-      ctx!.fillText("👆 Raspe aqui", width / 2, height / 2);
+      ctx!.fillText("Raspe aqui", width / 2, height / 2);
     }
 
     paintFoil();
