@@ -1,16 +1,16 @@
 const PIECES = [
-  { top: "4%", left: "8%", size: 8, color: "#5eead4", rotate: 15 },
-  { top: "10%", left: "85%", size: 10, color: "#f472b6", rotate: -20 },
-  { top: "18%", left: "4%", size: 6, color: "#fb923c", rotate: 35 },
-  { top: "2%", left: "45%", size: 7, color: "#2dd4bf", rotate: -10 },
-  { top: "26%", left: "90%", size: 9, color: "#5eead4", rotate: 25 },
-  { top: "34%", left: "3%", size: 8, color: "#f472b6", rotate: -15 },
-  { top: "8%", left: "65%", size: 6, color: "#fb923c", rotate: 40 },
-  { top: "42%", left: "94%", size: 7, color: "#2dd4bf", rotate: 5 },
-  { top: "48%", left: "12%", size: 6, color: "#f472b6", rotate: 30 },
-  { top: "0%", left: "25%", size: 5, color: "#fb923c", rotate: -25 },
-  { top: "38%", left: "70%", size: 6, color: "#5eead4", rotate: 12 },
-  { top: "16%", left: "55%", size: 5, color: "#2dd4bf", rotate: -30 },
+  { left: "6%", size: 8, color: "#5eead4", delay: 0, duration: 2.4 },
+  { left: "16%", size: 6, color: "#fb923c", delay: 0.5, duration: 2.8 },
+  { left: "26%", size: 7, color: "#f472b6", delay: 1.1, duration: 2.2 },
+  { left: "36%", size: 6, color: "#2dd4bf", delay: 0.2, duration: 3.0 },
+  { left: "46%", size: 9, color: "#fb923c", delay: 0.8, duration: 2.5 },
+  { left: "56%", size: 6, color: "#5eead4", delay: 1.4, duration: 2.7 },
+  { left: "64%", size: 7, color: "#f472b6", delay: 0.3, duration: 2.3 },
+  { left: "72%", size: 6, color: "#2dd4bf", delay: 1.7, duration: 2.9 },
+  { left: "80%", size: 8, color: "#fb923c", delay: 0.6, duration: 2.6 },
+  { left: "88%", size: 5, color: "#5eead4", delay: 1.0, duration: 2.4 },
+  { left: "94%", size: 6, color: "#f472b6", delay: 0.1, duration: 3.1 },
+  { left: "10%", size: 5, color: "#2dd4bf", delay: 1.9, duration: 2.5 },
 ];
 
 export default function Confetti() {
@@ -19,14 +19,14 @@ export default function Confetti() {
       {PIECES.map((piece, index) => (
         <span
           key={index}
-          className="absolute rounded-sm"
+          className="animate-confetti-fall absolute top-0 rounded-sm"
           style={{
-            top: piece.top,
             left: piece.left,
             width: piece.size,
             height: piece.size,
             backgroundColor: piece.color,
-            transform: `rotate(${piece.rotate}deg)`,
+            animationDelay: `${piece.delay}s`,
+            animationDuration: `${piece.duration}s`,
           }}
         />
       ))}

@@ -58,7 +58,7 @@ export default function ResgatarPage() {
         </p>
 
         {revealed ? (
-          <div className="relative mt-6 rounded-3xl bg-white p-8 shadow-sm">
+          <div className="animate-pop-in relative mt-6 rounded-3xl bg-white p-8 shadow-sm">
             <div className="absolute -left-2 -top-2 flex h-9 w-9 items-center justify-center rounded-full bg-white text-teal-500 shadow-md">
               <SparkleIcon className="h-4 w-4" />
             </div>
@@ -104,7 +104,9 @@ export default function ResgatarPage() {
           type="button"
           disabled={!revealed}
           onClick={() => router.push("/entrar")}
-          className="relative mt-6 flex w-full items-center justify-center gap-2 rounded-2xl py-4 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:bg-teal-300/60 enabled:bg-teal-900 enabled:hover:bg-teal-950"
+          className={`relative mt-6 flex w-full items-center justify-center gap-2 rounded-2xl py-4 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:bg-teal-300/60 enabled:bg-teal-900 enabled:hover:bg-teal-950 ${
+            revealed ? "animate-pop-in" : ""
+          }`}
         >
           Quero resgatar
           {!revealed && <LockIcon className="h-4 w-4" />}
