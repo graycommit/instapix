@@ -150,7 +150,7 @@ export default function EntrarPage() {
           <button
             type="button"
             disabled={!canSubmit}
-            onClick={() => router.push("/chat")}
+            onClick={() => router.push("/checkout")}
             className="mt-7 w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-700 py-4 font-semibold text-white shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
           >
             Continuar
