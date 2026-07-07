@@ -19,7 +19,7 @@ export default function LoadingPage() {
         <p className="mt-1 text-sm text-slate-500">Logo você será atendido</p>
 
         <div className="mt-10">
-          <SecondsRing seconds={5} onComplete={() => router.push("/entrar")} />
+          <SecondsRing seconds={5} onComplete={() => router.push("/resgatar")} />
         </div>
       </main>
 
