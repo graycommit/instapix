@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import AppHeader from "@/components/AppHeader";
 import { formatPhone } from "@/lib/phone";
+import { saveRegistration } from "@/lib/registration";
 
 function MailIcon({ className }: { className?: string }) {
   return (
@@ -150,7 +151,10 @@ export default function EntrarPage() {
           <button
             type="button"
             disabled={!canSubmit}
-            onClick={() => router.push("/checkout")}
+            onClick={() => {
+              saveRegistration({ name, email, phone });
+              router.push("/checkout");
+            }}
             className="mt-7 w-full rounded-full bg-gradient-to-r from-teal-500 to-teal-700 py-4 font-semibold text-white shadow-md transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
           >
             Continuar

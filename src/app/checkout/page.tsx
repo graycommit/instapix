@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { formatCPF } from "@/lib/cpf";
 import { formatPhone } from "@/lib/phone";
+import { loadRegistration } from "@/lib/registration";
 
 function ShieldIcon({ className }: { className?: string }) {
   return (
@@ -58,11 +58,19 @@ function SectionNumber({ n }: { n: number }) {
 export default function CheckoutPage() {
   const router = useRouter();
   const [name, setName] = useState("");
-  const [cpf, setCpf] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
-  const canSubmit = name.trim().length > 1 && cpf.replace(/\D/g, "").length === 11;
+  useEffect(() => {
+    const saved = loadRegistration();
+    if (!saved) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrates the form from data saved during registration.
+    setName(saved.name);
+    setPhone(saved.phone);
+    setEmail(saved.email);
+  }, []);
+
+  const canSubmit = name.trim().length > 1;
 
   return (
     <div className="flex min-h-dvh flex-col bg-white">
@@ -93,24 +101,6 @@ export default function CheckoutPage() {
                   placeholder="Seu Nome Completo"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 px-4 py-3.5 pr-11 text-slate-900 placeholder:text-slate-400 outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
-                />
-                <LockIcon className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
-              </div>
-            </div>
-
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-slate-600" htmlFor="cpf">
-                CPF <span className="text-teal-600">*</span>
-              </label>
-              <div className="relative">
-                <input
-                  id="cpf"
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="000.000.000-00"
-                  value={cpf}
-                  onChange={(e) => setCpf(formatCPF(e.target.value))}
                   className="w-full rounded-xl border border-slate-200 px-4 py-3.5 pr-11 text-slate-900 placeholder:text-slate-400 outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
                 />
                 <LockIcon className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
