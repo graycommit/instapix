@@ -1,11 +1,7 @@
-export default function Brand({ className = "h-8" }: { className?: string }) {
+export default function Brand({ className = "" }: { className?: string }) {
   return (
-    <div className={`aspect-[3860/1037] overflow-hidden ${className}`}>
-      <img
-        src="/logo.png"
-        alt="FastPay"
-        className="h-full w-full object-cover object-center"
-      />
-    </div>
+    <span className={`text-lg font-semibold tracking-tight text-ink ${className}`}>
+      FastPay
+    </span>
   );
 }

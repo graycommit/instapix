@@ -41,7 +41,7 @@ export default function SecondsRing({
           cy="100"
           r={radius}
           fill="none"
-          stroke="#E2E8F0"
+          stroke="#E0E0E0"
           strokeWidth="6"
         />
         <circle
@@ -49,7 +49,7 @@ export default function SecondsRing({
           cy="100"
           r={radius}
           fill="none"
-          stroke="#14B8A6"
+          stroke="#00857A"
           strokeWidth="6"
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -58,8 +58,8 @@ export default function SecondsRing({
         />
       </svg>
       <div className="absolute flex flex-col items-center">
-        <span className="text-5xl font-bold text-teal-900">{remaining}</span>
-        <span className="mt-1 text-xs font-semibold tracking-widest text-slate-400">
+        <span className="text-5xl font-bold tabular-nums text-ink">{remaining}</span>
+        <span className="mt-1 text-xs font-semibold tracking-widest text-neutral-400">
           SEGUNDOS
         </span>
       </div>

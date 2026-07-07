@@ -18,15 +18,15 @@ export default function TextField({
 } & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-slate-600">
-        {label} {required && <span className="text-teal-600">*</span>}
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink-soft">
+        {label} {required && <span className="text-brand">*</span>}
       </label>
-      <div className="flex items-center gap-2.5 rounded-2xl bg-slate-100 px-4 py-3.5 transition-shadow focus-within:ring-2 focus-within:ring-teal-300/60">
-        {icon && <span className="shrink-0 text-slate-400">{icon}</span>}
+      <div className="flex items-center gap-2.5 rounded-lg border border-hairline bg-white px-4 py-3 transition-colors focus-within:border-brand">
+        {icon && <span className="shrink-0 text-neutral-400">{icon}</span>}
         {before}
         <input
           id={id}
-          className="w-full min-w-0 bg-transparent text-slate-900 placeholder:text-slate-400 outline-none"
+          className="w-full min-w-0 bg-transparent text-ink placeholder:text-neutral-400 outline-none"
           {...inputProps}
         />
         {after}

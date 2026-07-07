@@ -49,7 +49,7 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center justify-around border-t border-slate-100 bg-white px-2 py-2">
+    <nav className="flex items-center justify-around border-t border-hairline bg-white px-2 py-2">
       {items.map(({ href, label, Icon }) => {
         const active = pathname === href;
         return (
@@ -58,8 +58,8 @@ export default function BottomNav() {
             type="button"
             disabled
             aria-disabled="true"
-            className={`flex cursor-not-allowed flex-col items-center gap-1 rounded-2xl px-4 py-2 text-xs font-medium ${
-              active ? "bg-teal-100 text-teal-700" : "text-slate-300"
+            className={`flex cursor-not-allowed flex-col items-center gap-1 rounded-lg px-4 py-2 text-xs font-medium ${
+              active ? "bg-brand/10 text-brand" : "text-neutral-300"
             }`}
           >
             <Icon className="h-5 w-5" />

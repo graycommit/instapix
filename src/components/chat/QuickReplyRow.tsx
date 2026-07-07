@@ -14,8 +14,8 @@ export default function QuickReplyRow({
           onClick={() => onSelect(option)}
           className={
             index === 0
-              ? "rounded-full bg-teal-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-700"
-              : "rounded-full border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+              ? "rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink-soft"
+              : "rounded-lg border border-hairline bg-white px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-neutral-50"
           }
         >
           {option}

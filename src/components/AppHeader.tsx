@@ -12,17 +12,17 @@ export default function AppHeader({
   const router = useRouter();
 
   return (
-    <header className="flex items-center justify-between px-4 py-3.5">
+    <header className="flex items-center justify-between border-b border-hairline bg-white px-4 py-3.5">
       <button
         type="button"
         onClick={() => router.back()}
         aria-label="Voltar"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-teal-800 transition-colors hover:bg-black/5"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink transition-colors hover:bg-black/5"
       >
         <BackIcon className="h-5 w-5" />
       </button>
 
-      <Brand className="h-6" />
+      <Brand />
 
       <div className="flex h-9 w-9 shrink-0 items-center justify-end">{right}</div>
     </header>

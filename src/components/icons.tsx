@@ -82,7 +82,7 @@ export function CardIcon({ className }: IconProps) {
 
 export function PixIcon({ className }: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" className={className}>
       <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" />
     </svg>
   );

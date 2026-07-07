@@ -38,14 +38,14 @@ export default function VoiceMessageBubble({
     <div className="flex items-start gap-2">
       <Avatar initials={initialsOf(name)} tone="slate" />
       <div className="flex max-w-[78%] flex-col items-start">
-        <div className="rounded-2xl rounded-bl-sm bg-white px-4 py-3 shadow-sm">
-          <p className="mb-1.5 text-xs font-bold text-teal-700">Mensagem de voz</p>
+        <div className="rounded-lg rounded-bl-sm border border-hairline bg-white px-4 py-3">
+          <p className="mb-1.5 text-xs font-semibold text-brand">Mensagem de voz</p>
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setPlaying((value) => !value)}
               aria-label={playing ? "Pausar" : "Reproduzir"}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-white"
             >
               {playing ? (
                 <PauseIcon className="h-3.5 w-3.5" />
@@ -57,15 +57,15 @@ export default function VoiceMessageBubble({
               {BAR_HEIGHTS.map((height, index) => (
                 <span
                   key={index}
-                  className={`w-0.5 rounded-full bg-teal-400 ${playing ? "animate-pulse" : ""}`}
+                  className={`w-0.5 rounded-full bg-brand-light ${playing ? "animate-pulse" : ""}`}
                   style={{ height, animationDelay: `${index * 60}ms` }}
                 />
               ))}
             </div>
-            <span className="text-xs text-slate-400">{duration}</span>
+            <span className="text-xs tabular-nums text-neutral-400">{duration}</span>
           </div>
         </div>
-        <span className="mt-1 px-1 text-[11px] text-slate-400">{time}</span>
+        <span className="mt-1 px-1 text-[11px] text-neutral-400">{time}</span>
       </div>
     </div>
   );

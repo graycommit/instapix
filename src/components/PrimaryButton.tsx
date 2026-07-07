@@ -18,7 +18,7 @@ export default function PrimaryButton({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-teal-500 to-teal-700 py-4 font-semibold text-white shadow-sm transition-opacity disabled:cursor-not-allowed disabled:opacity-40 ${className}`}
+      className={`flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-light py-3.5 font-semibold text-white shadow-sm transition-opacity disabled:cursor-not-allowed disabled:opacity-40 ${className}`}
     >
       {icon}
       {children}

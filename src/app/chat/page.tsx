@@ -103,9 +103,9 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="flex h-dvh flex-col bg-teal-50/40">
+    <div className="flex h-dvh flex-col bg-background">
       <AppTopBar
-        left={<span className="text-sm font-medium text-slate-500">Seu Nome</span>}
+        left={<span className="text-sm font-medium text-neutral-500">Seu Nome</span>}
         right={<BalancePill balance={149.52} />}
       />
 
@@ -142,10 +142,10 @@ export default function ChatPage() {
             case "user":
               return (
                 <div key={item.id} className="flex flex-col items-end">
-                  <div className="max-w-[78%] rounded-2xl rounded-br-sm bg-teal-600 px-4 py-3 text-sm text-white">
+                  <div className="max-w-[78%] rounded-lg rounded-br-sm bg-brand px-4 py-3 text-sm text-white">
                     {item.text}
                   </div>
-                  <span className="mt-1 px-1 text-[11px] text-slate-400">{item.time}</span>
+                  <span className="mt-1 px-1 text-[11px] text-neutral-400">{item.time}</span>
                 </div>
               );
             default:

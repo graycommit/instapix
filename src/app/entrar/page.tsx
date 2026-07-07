@@ -24,13 +24,13 @@ export default function EntrarPage() {
     password.length >= 6;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-gradient-to-br from-white via-teal-50 to-emerald-100/60">
+    <div className="flex min-h-dvh flex-col bg-background">
       <AppHeader />
 
       <main className="flex-1 px-6 pb-10">
         <div className="mx-auto w-full max-w-md">
-          <h1 className="text-2xl font-bold text-slate-900">Crie sua conta</h1>
-          <p className="mt-1 text-sm leading-relaxed text-slate-500">
+          <h1 className="text-2xl font-semibold tracking-tight text-ink">Crie sua conta</h1>
+          <p className="mt-1 text-sm leading-relaxed text-neutral-500">
             Ganhe dinheiro real jogando, assistindo vídeos, respondendo
             pesquisas e muito mais
           </p>
@@ -67,8 +67,8 @@ export default function EntrarPage() {
               icon={<PhoneIcon className="h-5 w-5" />}
               before={
                 <>
-                  <span className="shrink-0 text-slate-500">+55</span>
-                  <span className="h-4 w-px shrink-0 bg-slate-300" />
+                  <span className="shrink-0 text-neutral-500">+55</span>
+                  <span className="h-4 w-px shrink-0 bg-hairline" />
                 </>
               }
             />
@@ -86,7 +86,7 @@ export default function EntrarPage() {
                   type="button"
                   onClick={() => setShowPassword((value) => !value)}
                   aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
-                  className="shrink-0 text-slate-400"
+                  className="shrink-0 text-neutral-400"
                 >
                   <EyeIcon className="h-5 w-5" off={showPassword} />
                 </button>
@@ -106,21 +106,21 @@ export default function EntrarPage() {
             </PrimaryButton>
           </div>
 
-          <p className="mt-4 text-center text-xs leading-relaxed text-slate-500">
+          <p className="mt-4 text-center text-xs leading-relaxed text-neutral-500">
             Ao continuar, você concorda com nossos{" "}
-            <a href="#" className="font-medium text-teal-700 hover:underline">
+            <a href="#" className="font-medium text-brand hover:underline">
               Termos de Uso
             </a>{" "}
             e{" "}
-            <a href="#" className="font-medium text-teal-700 hover:underline">
+            <a href="#" className="font-medium text-brand hover:underline">
               Política de Privacidade
             </a>
             .
           </p>
 
-          <p className="mt-5 text-center text-sm text-slate-500">
+          <p className="mt-5 text-center text-sm text-neutral-500">
             Já tenho uma conta?{" "}
-            <a href="#" className="font-semibold text-teal-700 hover:underline">
+            <a href="#" className="font-semibold text-brand hover:underline">
               Entrar
             </a>
           </p>

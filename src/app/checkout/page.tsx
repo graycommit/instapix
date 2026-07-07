@@ -19,7 +19,7 @@ import { formatPhone } from "@/lib/phone";
 
 function SectionNumber({ n }: { n: number }) {
   return (
-    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-500 text-xs font-bold text-white">
+    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white">
       {n}
     </span>
   );
@@ -46,11 +46,11 @@ export default function CheckoutPage() {
     email.trim().length > 3;
 
   return (
-    <div className="flex min-h-dvh flex-col bg-white">
+    <div className="flex min-h-dvh flex-col bg-background">
       <AppTopBar
-        left={<h1 className="text-lg font-bold text-slate-900">Finalizar</h1>}
+        left={<h1 className="text-lg font-semibold tracking-tight text-ink">Finalizar</h1>}
         right={
-          <span className="flex items-center gap-1.5 text-sm font-medium text-teal-600">
+          <span className="flex items-center gap-1.5 text-sm font-medium text-brand">
             <ShieldIcon className="h-4 w-4" />
             Ambiente seguro
           </span>
@@ -61,7 +61,7 @@ export default function CheckoutPage() {
         <div className="mx-auto flex w-full max-w-md flex-col gap-5">
           <div className="flex items-center gap-2">
             <SectionNumber n={1} />
-            <h2 className="text-base font-bold text-slate-900">Cliente</h2>
+            <h2 className="text-base font-semibold text-ink">Cliente</h2>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -101,18 +101,18 @@ export default function CheckoutPage() {
             />
           </div>
 
-          <div className="rounded-2xl border border-teal-100 bg-teal-50 p-4">
-            <p className="flex items-center gap-2 text-sm font-semibold text-teal-800">
+          <div className="rounded-lg border border-hairline bg-neutral-50 p-4">
+            <p className="flex items-center gap-2 text-sm font-semibold text-ink">
               <LockIcon className="h-4 w-4" />
               Usamos seus dados de forma segura e criptografada:
             </p>
             <ul className="mt-2 flex flex-col gap-1.5">
-              <li className="flex items-start gap-2 text-sm text-teal-700">
-                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0" />
+              <li className="flex items-start gap-2 text-sm text-ink-soft">
+                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                 Seus dados ficam protegidos em todo o processo;
               </li>
-              <li className="flex items-start gap-2 text-sm text-teal-700">
-                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0" />
+              <li className="flex items-start gap-2 text-sm text-ink-soft">
+                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
                 Não compartilhamos suas informações com terceiros;
               </li>
             </ul>
@@ -120,24 +120,24 @@ export default function CheckoutPage() {
 
           <div className="flex items-center gap-2 pt-2">
             <SectionNumber n={2} />
-            <h2 className="text-base font-bold text-slate-900">Opções de pagamento</h2>
+            <h2 className="text-base font-semibold text-ink">Opções de pagamento</h2>
           </div>
 
-          <div className="flex items-center gap-3 rounded-2xl border-2 border-teal-500 bg-white px-4 py-3.5">
-            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 border-teal-500">
-              <span className="h-2 w-2 rounded-full bg-teal-500" />
+          <div className="flex items-center gap-3 rounded-lg border-2 border-brand bg-white px-4 py-3.5">
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 border-brand">
+              <span className="h-2 w-2 rounded-full bg-brand" />
             </span>
-            <PixIcon className="h-5 w-5 shrink-0 text-teal-600" />
+            <PixIcon className="h-5 w-5 shrink-0 text-brand" />
             <div>
-              <p className="text-sm font-bold text-slate-900">Pix</p>
-              <p className="text-xs text-slate-500">Pagamento instantâneo</p>
+              <p className="text-sm font-semibold text-ink">Pix</p>
+              <p className="text-xs text-neutral-500">Pagamento instantâneo</p>
             </div>
           </div>
 
           {paid ? (
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-center">
-              <p className="text-sm font-bold text-emerald-700">Pagamento confirmado!</p>
-              <p className="mt-1 text-xs text-emerald-600">
+            <div className="rounded-lg border border-hairline bg-neutral-50 p-4 text-center">
+              <p className="text-sm font-semibold text-ink">Pagamento confirmado!</p>
+              <p className="mt-1 text-xs text-neutral-500">
                 Você vai receber o acesso por e-mail em instantes.
               </p>
             </div>
@@ -151,7 +151,7 @@ export default function CheckoutPage() {
             </PrimaryButton>
           )}
 
-          <ul className="flex flex-col gap-1.5 text-xs text-slate-500">
+          <ul className="flex flex-col gap-1.5 text-xs text-neutral-500">
             <li>• Pagamento somente à vista</li>
             <li>• Após a confirmação do Pix, você recebe o acesso na hora, por e-mail</li>
             <li>• Ao gerar o código atente para a data de expiração</li>

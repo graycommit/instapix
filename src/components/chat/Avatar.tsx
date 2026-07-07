@@ -1,6 +1,6 @@
 const TONES = {
-  teal: "bg-teal-500",
-  slate: "bg-slate-400",
+  teal: "bg-brand",
+  slate: "bg-ink-soft",
 } as const;
 
 export default function Avatar({

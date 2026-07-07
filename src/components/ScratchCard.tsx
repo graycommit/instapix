@@ -44,8 +44,8 @@ export default function ScratchCard({
       ctx!.fillStyle = gradient;
       ctx!.fillRect(0, 0, width, height);
 
-      ctx!.fillStyle = "#334155";
-      ctx!.font = "700 16px system-ui, sans-serif";
+      ctx!.fillStyle = "#263238";
+      ctx!.font = "600 16px Inter, system-ui, sans-serif";
       ctx!.textAlign = "center";
       ctx!.textBaseline = "middle";
       ctx!.fillText("Raspe aqui", width / 2, height / 2);
@@ -123,10 +123,10 @@ export default function ScratchCard({
   return (
     <div
       ref={containerRef}
-      className="relative h-48 w-full select-none overflow-hidden rounded-3xl bg-white shadow-sm"
+      className="relative h-48 w-full select-none overflow-hidden rounded-xl border border-hairline bg-white shadow-sm"
     >
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-4xl font-bold text-teal-700">{prizeLabel}</span>
+        <span className="text-4xl font-bold tabular-nums text-brand">{prizeLabel}</span>
       </div>
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full touch-none" />
     </div>
