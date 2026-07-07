@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { formatPhone } from "@/lib/phone";
 import { loadRegistration } from "@/lib/registration";
 
 function ShieldIcon({ className }: { className?: string }) {
@@ -57,15 +58,22 @@ function SectionNumber({ n }: { n: number }) {
 export default function CheckoutPage() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const saved = loadRegistration();
     if (!saved) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrates the form from data saved during registration.
     setName(saved.name);
+    setPhone(saved.phone);
+    setEmail(saved.email);
   }, []);
 
-  const canSubmit = name.trim().length > 1;
+  const canSubmit =
+    name.trim().length > 1 &&
+    phone.replace(/\D/g, "").length >= 10 &&
+    email.trim().length > 3;
 
   return (
     <div className="flex min-h-dvh flex-col bg-white">
@@ -96,6 +104,42 @@ export default function CheckoutPage() {
                   placeholder="Seu Nome Completo"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3.5 pr-11 text-slate-900 placeholder:text-slate-400 outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                />
+                <LockIcon className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-slate-600" htmlFor="phone">
+                Telefone <span className="text-teal-600">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  id="phone"
+                  type="tel"
+                  inputMode="numeric"
+                  placeholder="(99) 99999-9999"
+                  value={phone}
+                  onChange={(e) => setPhone(formatPhone(e.target.value))}
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3.5 pr-11 text-slate-900 placeholder:text-slate-400 outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
+                />
+                <LockIcon className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-slate-600" htmlFor="email">
+                E-mail <span className="text-teal-600">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  id="email"
+                  type="email"
+                  inputMode="email"
+                  placeholder="seuemail@exemplo.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-xl border border-slate-200 px-4 py-3.5 pr-11 text-slate-900 placeholder:text-slate-400 outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
                 />
                 <LockIcon className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-300" />
