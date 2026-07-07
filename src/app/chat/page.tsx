@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import AppTopBar from "@/components/AppTopBar";
+import BalancePill from "@/components/BalancePill";
 import BottomNav from "@/components/BottomNav";
 import AttachmentButton from "@/components/chat/AttachmentButton";
-import ChatTopBar from "@/components/chat/ChatTopBar";
 import ImageMessageBubble from "@/components/chat/ImageMessageBubble";
 import QuickReplyRow from "@/components/chat/QuickReplyRow";
 import SystemNotice from "@/components/chat/SystemNotice";
@@ -103,7 +104,10 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-dvh flex-col bg-teal-50/40">
-      <ChatTopBar name="Seu Nome" balance={149.52} />
+      <AppTopBar
+        left={<span className="text-sm font-medium text-slate-500">Seu Nome</span>}
+        right={<BalancePill balance={149.52} />}
+      />
 
       <main className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
         {items.map((item) => {

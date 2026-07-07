@@ -2,26 +2,14 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import AccountButton from "@/components/AccountButton";
 import AppTopBar from "@/components/AppTopBar";
+import BalancePill from "@/components/BalancePill";
 import BottomNav from "@/components/BottomNav";
+import Brand from "@/components/Brand";
+import PrimaryButton from "@/components/PrimaryButton";
 import ScratchCard from "@/components/ScratchCard";
-
-function CheckBadgeIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M5 13l4 4L19 7" />
-    </svg>
-  );
-}
-
-function LockIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className}>
-      <rect x="5" y="11" width="14" height="9" rx="2" />
-      <path d="M8 11V7a4 4 0 018 0v4" />
-    </svg>
-  );
-}
+import { CheckBadgeIcon, LockIcon } from "@/components/icons";
 
 export default function ResgatarPage() {
   const router = useRouter();
@@ -43,10 +31,18 @@ export default function ResgatarPage() {
 
   return (
     <div className="flex min-h-dvh flex-col bg-teal-50/40">
-      <AppTopBar balance={revealed ? prizeAmount : 0} />
+      <AppTopBar
+        left={
+          <>
+            <AccountButton />
+            <Brand className="h-6" />
+          </>
+        }
+        right={<BalancePill balance={revealed ? prizeAmount : 0} />}
+      />
 
-      <main className="relative flex-1 select-none px-5 pb-6 text-center">
-        <h1 className="relative text-xl font-bold text-teal-950">
+      <main className="relative flex-1 select-none px-5 pb-6 pt-6 text-center">
+        <h1 className="relative text-xl font-bold text-slate-900">
           {revealed ? "Parabéns" : "Parabéns! Você foi selecionado"}
         </h1>
         <p className="relative mt-1 text-sm text-slate-500">
@@ -93,17 +89,15 @@ export default function ResgatarPage() {
           </>
         )}
 
-        <button
-          type="button"
-          disabled={!revealed}
-          onClick={() => router.push("/entrar")}
-          className={`relative mt-6 flex w-full items-center justify-center gap-2 rounded-2xl py-4 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:bg-teal-300/60 enabled:bg-teal-900 enabled:hover:bg-teal-950 ${
-            revealed ? "animate-fade-up" : ""
-          }`}
-        >
-          Quero resgatar
-          {!revealed && <LockIcon className="h-4 w-4" />}
-        </button>
+        <div className={`mt-6 ${revealed ? "animate-fade-up" : ""}`}>
+          <PrimaryButton
+            disabled={!revealed}
+            onClick={() => router.push("/entrar")}
+            icon={!revealed && <LockIcon className="h-4 w-4" />}
+          >
+            Quero resgatar
+          </PrimaryButton>
+        </div>
 
         <p className="relative mt-2 text-xs text-slate-400">
           {revealed ? "Complete seu cadastro para receber" : "Leva menos de 1 minuto"}
